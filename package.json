@@ -1,0 +1,22 @@
+{
+  "name": "technophilehsub.github.io",
+  "version": "1.0.0",
+  "description": "Git Pages ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technophileshub/technophileshub.github.io.git"
+  },
+  "author": "Pavan Kumar Polavarapu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/technophileshub/technophileshub.github.io/issues"
+  },
+  "homepage": "https://github.com/technophileshub/technophileshub.github.io#readme",
+  "dependencies": {
+    "node-sass": "^4.9.4"
+  }
+}
