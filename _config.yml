@@ -18,7 +18,9 @@ email: pavan.vnr@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Notes to keep track of learning outcomes of programming in general. Mostly on Machine Learning, Data Science, SAP UI5. 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://technophileshub.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+permalink: pretty
+
 twitter_username: pavankumarp1990
 github_username:  technophileshub
 

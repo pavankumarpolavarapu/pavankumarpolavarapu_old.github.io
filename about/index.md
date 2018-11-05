@@ -5,7 +5,7 @@ permalink: /about/
 <img style="float:left; object-fit: cover; border-radius:50%; margin: 8px 50px" width="180" height="250" src="/assets/images/profile.png" alt="Profile">
 
 ## About 
-Hello friends, My name is Pavan Kumar Polavarapu, I am a passionate developer interested in Machine Learning and researching more on the topic. I have a Technology blog Technophileshub but I felt it would better to keep track using git for all the learning outcomes of the projects that I am working on.  
+Hello friends, My name is Pavan Kumar Polavarapu, I am a passionate developer interested in Machine Learning and researching more on the topic. I have a Technology blog Technophileshub but I felt Git would be better place to keep track of learning outcomes for the projects that I am working on.  
 <br>
 <br>
 <br>
