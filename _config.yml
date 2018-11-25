@@ -28,7 +28,12 @@ github_username:  technophileshub
 google_analytics: UA-128577657-1
 
 # Build settings
-markdown: kramdown
+# Kramdown settings
+kramdown:
+  input: GFM
+
+# Highlighter settings
+highlighter: rouge
 theme: minima
 plugins:
   - jekyll-feed

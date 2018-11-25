@@ -46,11 +46,11 @@ Input Image -> Primal Sketch -> 2-1/2D Sketch -> 3D Model Sketch
 
 #### Generalized Cylinder - Brooks & Binford, 1979
 Wanted to move from block world to real world in recognizing things
-<img src="/assets/notebook-images/generalizedcylinder.png" alt="Generalized Cylinder">
+<img src="/assets/notebook-images/vision/generalizedcylinder.png" alt="Generalized Cylinder">
 
 #### Pictorial Structure - Fischler & Elschlager, 1973
 Tried reducing complex information into simple structures
-<img src="/assets/notebook-images/pictorialstructure.png" alt="Pictorial Structure">
+<img src="/assets/notebook-images/vision/pictorialstructure.png" alt="Pictorial Structure">
 
 
 All these works are insignificant compared to the task at hand. If object recognition is too hard, object segmentation could be worked.

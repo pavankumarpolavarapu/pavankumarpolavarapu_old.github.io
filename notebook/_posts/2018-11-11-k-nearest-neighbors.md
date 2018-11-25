@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Implemeting a k-Nearest Neighbor classifier"
+title: "Understanding k-Nearest Neighbor classifier"
 date:   2018-11-14
 category: notebook
 comments: true
@@ -8,7 +8,7 @@ math: true
 author: "Pavan Kumar Polavarapu"
 ---
 
->Recently, I have started following CS231n MIT Course and the first assignment of week 2 is to implement K-Nearest Neighbors Classifier and here I wanted to share thoughts on my approach.
+>Recently, I have started following CS231n MIT Course and the first assignment of week 2 is to implement K-Nearest Neighbors Classifier. This post is introduction to KNN.
 
 ### Machine Learning
 Machine learning algorithms are broadly divided into two categories : Classification/Regression, Clustering. There are supervised and unsupervised learning approaches in each of these categories. Classification category is about identifying a data point and classifying that point into a category. For example., Email can be either Spam/Not Spam.  Clustering is about dividing data points into groups/clusters such that points in same group are more similar than the other group. 
@@ -18,7 +18,9 @@ KNN is a classification algorithm and is considered to be the easiest among all 
 
 For example, consider Apples and Bananas are placed in a plane(based on certain data). Now if a new unknown has to be classified into an Apple or a Banana, we place that element in the same n-dimensional space as that of Apples and Bananas 
 and find out to which category it's close to. Now can you say what's the unknown element in below image is.
-<img src="/assets/notebook-images/knn-classification.png" alt="KNN Classification">
+![KNN Classification](/assets/notebook-images/knn/knn-classification.png)  
+__Figure 1:__ _KNN Classification_
+{: style="text-align: center;"}
 
 Now you can ask, I understood Pavan but why is it called K-Nearest Neighbor algorithm but not nearest neighbor algorithm. The answer for that is, instead of searching for one nearest neighbor, the algorithm searches for k nearest neighbors and classifies new data point as the group with majority in those k points.
 
