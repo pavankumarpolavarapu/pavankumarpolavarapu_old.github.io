@@ -7,6 +7,16 @@ comments: true
 math: true
 author: "Pavan Kumar Polavarapu"
 ---
+- [Loading the CIFAR10 dataset](#loading-the-cifar10-dataset)  
+- [Compute Distance](#compute-distance)  
+        -[Two Loop Implementation](#two-loop-implementation)  
+        -[One Loop Implementation](#one-loop-implementation)  
+        -[No Loop Implementation](#no-loop-implementation)  
+- [Visualizing the distance between images](#visualizing-the-distance-between-images)  
+- [Predicting Labels](#predicting-labels)  
+- [Time Taken for Computing Distance](#time-taken)  
+- [Cross Validation to find best K](#cross-validation-to-find-best-k)
+- [Final Thoughts](#final-thoughts)
 
 > If you are currently doing CS231n first assignment, Please be advised that article contains code implementation and now is the right time to close the tab.
 
@@ -14,7 +24,7 @@ author: "Pavan Kumar Polavarapu"
 
 Since, I am following CS231n course content, I would be using notations and variable naming associated with the assignment. 
 
-### Loading the CIFAR10 dataset
+## Loading the CIFAR10 dataset
 Before we can proceed, we need to understand image data. CIFAR10 dataset contains 60,000 labeled images. These 60, 000 images are divided into 10 categories with each category containing 6000 images. Each image is of 32X32 resolution with each pixel containing 3 color bits.
 
 The logic for loading images is already taken care in data_utils.py file assuming that we have placed the dataset in cs231n/datasets. 
@@ -27,7 +37,7 @@ __Figure 1:__ _Samples of the CIFAR-10 Dataset_
 
 As you can see there are 7 samples from each of these 10 categories. These images are tiny compared to our 10 mega pixel mobile images but from the quality of color in these images you can easily say that these images are compressed for computational efficiency. 
 
-### Compute Distance
+## Compute Distance
 In our previous post, we have discussed about the two approaches (L1(Manhattan) and L2(Euclidean)) for distance calculations. These distances are calculated pixel by pixel and two images are considered to be close when square root of sum of the distances between pixels is minimum. 
 
 Considering two images $$ X_{i}, X_{j} $$. L2 distance between these two images is given as below
@@ -36,10 +46,10 @@ $$ d_{2}(X_{i}, X_{j}) = \sqrt{\sum_{p}(X_{i}^{p} - X_{j}^{p})^{2}} $$
 
 Where $$ X_{i}^{p} $$ represent single pixel.
 
-## <a name="twoloop">Two Loop Implementation</a>
+### Two Loop Implementation
 We want to calculate difference for each test image with all the training images. We have two different arrays for training and testing images, naive and easiest approach would be is to loop through each test image and loop through each training image and compute the distance between train and test images. However, as you can imagine the run time complexity would be $$ O(n_^{2}) $$.
 
-```Python
+```python
 def compute_distances_two_loops(self, X):
     num_test = X.shape[0]
     num_train = self.X_train.shape[0]
@@ -53,10 +63,10 @@ def compute_distances_two_loops(self, X):
     return dists
 ```
 
-## <a name="oneloop"> One Loop Implementation </a>
+### One Loop Implementation
 One loop implementation supposed to improve run time performance by eliminating the secondary loop on training images. However, emperical results differ. Below is the logic for one loop implementation.
 
-```Python
+```python
 def compute_distances_one_loop(self, X):
     num_test = X.shape[0]
     num_train = self.X_train.shape[0]
@@ -68,7 +78,7 @@ def compute_distances_one_loop(self, X):
     return dists          
 ```
 
-## <a name="noloop"> No Loop Implementation </a>
+### No Loop Implementation
 Run time performance can be greatly improved if we can compute the distance between these images without any loops. Assuming each image as a vector represented in n-dimensional space is the approach that we can use to eliminate the loops. 
 
 Distance between any two vectors is given by the equation
@@ -90,7 +100,7 @@ def compute_distances_no_loops(self, X):
     dists = np.sqrt(-2 * np.dot(X, self.X_train.T) + np.sum(self.X_train ** 2, axis=1) + np.sum(X**2, axis=1)[:, np.newaxis])    
 ```
 
-## <a name="visualization"> Visualizing the distances between images</a>
+## Visualizing the distances between images
 Once you have the distances of test images with all that of training images, we can plot the distances and visualize the distance matrix. Output will look something like below image
 
 ![Distance between Training and Testing Images](/assets/notebook-images/knn/distances.png)  
@@ -101,10 +111,10 @@ One thing that you can observe is, there are structured patterns with different 
 
 Since image distance calculation is pixel to pixel, I assume that images with similar background cancel each other out to produce smaller distance irrespective of the object in the image. For example, bird in sky and aeroplane in sky, horse in grass and a cow in grass. It is possible that, horizontal dark or light line is when testing image has common/unsimilar colors and vertical dark and light line is when training image has common/unsimilar colors. To be honest, I was expecting a graph that looks like stars in the sky but somehow many images have strong/weak correlation with many other images.
 
-## <a name="prediction"> Predicting labels </a>
+## Predicting labels
 Since we have taken first 500 images of test dataset, Prediction accuracy should be same for all. It is 27.4% with K=1 and 27.8% with K=5. So, 1 of 4 images classified are correct. That's a very low accuracy but the execution finished in 0.3 seconds on my PC. Ideally, we want both accuracy and speed but that's a good start.
 
-## <a name="timetaken"> Time Taken </a>
+## Time Taken
 In my PC, following is the time taken by each of the three different versions of implementation
 ```
 Two loop version took 18.966102 seconds
@@ -114,12 +124,12 @@ No loop version took 0.283223 seconds
 
 As I mentioned earlier, One loop is kind of outlier, don't know the exact reason why it took more than two loop version and TA explanation is not so convincing. Will figure it out later.
 
-## <a name="crossvalidation">Cross Validation to Find Best K</a>
+## Cross Validation to Find Best K
 One of the approaches to improve the efficiency of KNN algorithm is to compare distance with more neighbours and classify. We have tried K as 1 and 4 but we don't know what would be an ideal value of K and that's when Cross validation helps. So let's cross validate the dataset with different values of K and observe efficiency of algorithm for each value of K.
 
 Since we have subsampled the training dataset to 5000 images, it is easy for us to divide the lot into 5 folds and during each iteration we can pick one fold as cross validation set. The values of K are already chosen for the assignment in the book, we can alternatively change are chose to run with this K. Following is the code implementation and plot of performance over K.
 
-```Python
+```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 
@@ -194,5 +204,8 @@ __Figure 4:__ _Accuracy for different values of K_
 
 Seems like best accuracy is between 10 and 15, we can try more values in the range and decide the ideal K.
 
-## <a name="finalthoughts"> Final Thoughts </a>
-Comparing images pixel by pixel and classifying will definitely not be accurate. Having said that, KNN classified 1/4th of 5000 images correctly in 0.2 seconds, which in my opinion is awesome. 27.8% Accuracy is not something that we are hoping but it is a good start. 
+## Final Thoughts
+Comparing images pixel by pixel and classifying will definitely not be accurate. Having said that, KNN classified 1/4th of 5000 images correctly in 0.2 seconds, which in my opinion is awesome. 27.8% Accuracy is not something that we are hoping but it is a good start.  
+
+Update:  
+2018-12-24: Added index, removed hyperlinks on headings and typo fix on syntax highlight

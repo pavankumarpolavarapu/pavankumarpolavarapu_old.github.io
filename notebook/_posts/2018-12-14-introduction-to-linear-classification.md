@@ -7,6 +7,11 @@ comments: true
 math: true
 author: "Pavan Kumar Polavarapu"
 ---
+- [Linear Classification](#linear-classification) 
+    - [Parametric Approach](#parametric-approach)
+        - [Bias Trick](#bias-trick)
+- [Loss Function](#loss-function)  
+    - [Multiclass Support Vector Machine loss](#multiclass-support-vector-machine-loss)
 
 > In my previous post, I have covered implmentation of K-NN classifier, in this post we are going to discuss basics of Linear Classification
 
@@ -65,4 +70,7 @@ $$ L = \frac{1}{N} \sum_i \sum_{j\neq y_i} \left[ \max(0, f(x_i; W)_j - f(x_i; W
 
 These formulas might seem daunting initially but when you apply you will realize that it is not so complicated after all. Having said that, understanding classifiers and loss functions is time consuming but you should spend every ounce of your energy to understand and learn how the models work. Hopefully, over a period of time we will get comfortable.
 
-There are many different loss functions which deserve their own post. I suggest to take one at a time if you are beginner to ML. 
+There are many different loss functions which deserve their own post. I suggest to take one at a time if you are beginner to ML.  
+
+Update:  
+2018-12-24: Added index
